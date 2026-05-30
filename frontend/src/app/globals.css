@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-space: 'Space Grotesk', sans-serif;
+  --font-jetbrains: 'JetBrains Mono', monospace;
+
+  --bg-primary: #0a0b0e;
+  --bg-secondary: #15161c;
+  --bg-card: #1a1b24;
+  --bg-hover: #22232f;
+  --border: #2a2c3a;
+  --border-bright: #3a3c4e;
+  --text-primary: #e8e9f0;
+  --text-secondary: #9498b0;
+  --text-muted: #5c607a;
+  --volt: #39ff14;
+  --volt-dim: rgba(57, 255, 20, 0.15);
+  --volt-glow: 0 0 20px rgba(57, 255, 20, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-space);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg-primary); }
+::-webkit-scrollbar-thumb { background: var(--border-bright); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* Selection */
+::selection { background: var(--volt-dim); color: var(--volt); }
+
+@layer utilities {
+  .glass {
+    background: rgba(26, 27, 36, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+  }
+
+  .volt-glow {
+    box-shadow: var(--volt-glow);
+  }
+
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      var(--bg-card) 25%,
+      var(--bg-hover) 50%,
+      var(--bg-card) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite linear;
+  }
+
+  .card-hover {
+    transition: all 0.2s ease;
+  }
+  .card-hover:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--volt) 0%, #00d4aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* PDF viewer */
+.react-pdf__Page__canvas {
+  max-width: 100% !important;
+  height: auto !important;
+}
