@@ -7,11 +7,15 @@ import os
 from app.core.database import create_tables
 from app.api import links, groups, pdfs, llm, stats, bulk
 
+# Caminho absoluto baseado na localização do main.py
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_DIR = os.path.join(BASE_DIR, "uploads")
+os.makedirs(UPLOAD_DIR, exist_ok=True)
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await create_tables()
-    os.makedirs("uploads", exist_ok=True)
     yield
 
 
@@ -30,7 +34,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/uploads", StaticFiles(directory="uploads"), name="uploads")
+app.mount("/uploads", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 app.include_router(links.router, prefix="/api/links", tags=["links"])
 app.include_router(groups.router, prefix="/api/groups", tags=["groups"])

@@ -1,5 +1,9 @@
 from pydantic_settings import BaseSettings
 from typing import Optional
+import os
+
+# Caminho absoluto baseado neste arquivo
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 class Settings(BaseSettings):
@@ -9,7 +13,7 @@ class Settings(BaseSettings):
     # App
     DEBUG: bool = False
     SECRET_KEY: str = "your-secret-key-change-in-production"
-    UPLOAD_DIR: str = "uploads"
+    UPLOAD_DIR: str = os.path.join(BASE_DIR, "uploads")
     MAX_FILE_SIZE_MB: int = 50
 
     # LLM providers
