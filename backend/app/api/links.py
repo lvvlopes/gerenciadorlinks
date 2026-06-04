@@ -4,6 +4,7 @@ from sqlalchemy import select, func, or_
 from typing import Optional
 from pydantic import BaseModel
 import json
+import os
 
 from app.core.database import get_db
 from app.models.link import Link
@@ -38,6 +39,9 @@ class LinkUpdate(BaseModel):
 
 @router.post("/")
 async def create_link(data: LinkCreate, db: AsyncSession = Depends(get_db)):
+    print(f"DEBUG provider recebido: '{data.llm_provider}'", flush=True)
+    print(f"DEBUG env DEFAULT_LLM_PROVIDER: '{os.environ.get('DEFAULT_LLM_PROVIDER')}'", flush=True)
+    
     if not is_valid_url(data.url):
         raise HTTPException(status_code=400, detail="URL inválida")
 
