@@ -18,7 +18,7 @@ router = APIRouter()
 class LinkCreate(BaseModel):
     url: str
     group_id: Optional[str] = None
-    llm_provider: str = "anthropic"
+    llm_provider: str = ""  # vazio = usa DEFAULT_LLM_PROVIDER do ambiente
     custom_title: Optional[str] = None
     custom_notes: Optional[str] = None
     # Campos enviados pela extensão Chrome (conteúdo já extraído do DOM)
