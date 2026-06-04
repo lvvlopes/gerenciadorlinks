@@ -19,7 +19,7 @@ export function AddLinkModal({ groups, defaultGroupId, onClose, onSuccess }: Add
   const [customTitle, setCustomTitle] = useState("");
   const [customNotes, setCustomNotes] = useState("");
   const [groupId, setGroupId] = useState(defaultGroupId || "");
-  const [provider, setProvider] = useState("anthropic");
+  const [provider, setProvider] = useState("openai");
 
   const { data: providers = [] } = useQuery({
     queryKey: ["llm-providers"],
